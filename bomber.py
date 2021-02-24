@@ -86,13 +86,6 @@ def format_phone(num):
 
 
 
-def update():
-    if shutil.which('git'):
-        do_git_update()
-    else:
-        do_zip_update()
-
-
 def check_for_updates():
     mesgdcrt.SectionMessage("Checking for updates")
     fver = requests.get(
