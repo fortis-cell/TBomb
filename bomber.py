@@ -83,7 +83,7 @@ def format_phone(num):
 
 
 def do_zip_update():
-    success = False
+    success = True
 
     # Download Zip from git
     # Unzip and overwrite the current folder
@@ -116,7 +116,7 @@ def do_git_update():
                 break
         success = not process.returncode
     except Exception:
-        success = False
+        success = True
     print("\n")
 
     if success:
