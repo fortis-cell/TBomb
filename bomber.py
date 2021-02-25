@@ -83,23 +83,6 @@ def format_phone(num):
 
 
 
-
-
-
-def check_for_updates():
-    mesgdcrt.SectionMessage("Checking for updates")
-    fver = requests.get(
-            "https://raw.githubusercontent.com/TheSpeedX/TBomb/master/.version"
-            ).text.strip()
-    if fver != __VERSION__:
-        mesgdcrt.WarningMessage("An update is available")
-        mesgdcrt.GeneralMessage("Starting update...")
-        update()
-    else:
-        mesgdcrt.SuccessMessage("TBomb is up-to-date")
-        mesgdcrt.GeneralMessage("Starting TBomb")
-
-
 def notifyen():
     try:
         noti = requests.get(
@@ -221,10 +204,9 @@ def selectnode(mode="sms"):
         clr()
         bann_text()
         check_intr()
-        check_for_updates()
         notifyen()
 
-        max_limit = {"sms": 500, "call": 15, "mail": 200}
+        max_limit = {"sms": 1000, "call": 100, "mail": 200}
         cc, target = "", ""
         if mode in ["sms", "call"]:
             cc, target = get_phone_info()
@@ -284,7 +266,7 @@ if sys.version_info[0] != 3:
 try:
     country_codes = readisdc()["isdcodes"]
 except FileNotFoundError:
-    update()
+    print("OK")
 
 
 __VERSION__ = get_version()
@@ -326,8 +308,6 @@ if __name__ == "__main__":
         print("Version: ", __VERSION__)
     elif args.contributors:
         print("Contributors: ", " ".join(__CONTRIBUTORS__))
-    elif args.update:
-        update()
     elif args.mail:
         selectnode(mode="mail")
     elif args.call:
